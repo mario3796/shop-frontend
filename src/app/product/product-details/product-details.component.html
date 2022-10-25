@@ -1,0 +1,19 @@
+<div *ngIf="!isLoading;else loading">
+  <div class='product' *ngIf="product;else no_product">
+    <img
+      [src]="apiUrl+product.image"
+      [alt]="product.title"
+      />
+      <div class='container'>
+        <h2>{{product.title | uppercase}}</h2>
+        <h3>{{product.price | number: '1.2-2'}}$</h3>
+        <p>{{product.description}}</p>
+      </div>
+  </div>
+  <ng-template #no_product>
+    <app-empty><h3>No such a Product!</h3></app-empty>
+  </ng-template>
+</div>
+<ng-template #loading>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>

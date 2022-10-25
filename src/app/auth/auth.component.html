@@ -1,0 +1,14 @@
+<app-form>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+        <app-error *ngIf="error">{{error}}</app-error>
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" />
+        <div *ngIf="!isLogin">
+            <label for="username">Username</label>
+            <input type="text" id="username" formControlName="username" />
+        </div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+        <button type="submit">{{isLogin ? 'Login' : 'Sign up'}}</button>
+    </form>
+</app-form>

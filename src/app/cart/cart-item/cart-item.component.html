@@ -1,0 +1,14 @@
+<div class="cartItem" [id]="item._id">
+    <div class="container">
+      <h3>Title: {{item.title}}</h3>
+      <h4>Price: {{item.price | number: '1.2-2'}}</h4>
+      <h4>Quantity: {{item.quantity}}</h4>
+      <app-button>
+          <button (click)="onAdding(item._id)"
+          style="width: 30px; font-size: xx-large;">+</button>
+          <button (click)="onRemoving(item._id)"
+          style="width: 30px; font-size: xx-large;">-</button>
+      </app-button>
+    </div>
+    <img [src]="apiUrl+item.image" [alt]="item.title" />
+</div>

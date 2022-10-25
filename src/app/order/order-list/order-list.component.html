@@ -1,0 +1,14 @@
+<div *ngIf="!isLoading;else loading">
+    <div *ngIf="orders.length > 0;else no_order">
+        <app-order-item
+        *ngFor="let item of orders"
+        [item]="item"
+        ></app-order-item>
+    </div>
+    <ng-template #no_order>
+        <h3>No Orders yet!</h3>
+    </ng-template>
+</div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

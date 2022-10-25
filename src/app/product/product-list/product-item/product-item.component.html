@@ -1,0 +1,14 @@
+<div class="productItem">
+    <img [src]="apiUrl+product.image" [alt]="product.title">
+    <div class="container">
+        <h2>{{product.title | uppercase}}</h2>
+        <h3>{{ product.price | number: '1.2-2' }}</h3>
+        <app-button>
+            <a routerLink="/products/{{product._id}}">Details</a>
+            <a *ngIf="isAuthenticated"
+            [routerLink]="'/edit-product/' + product._id" [queryParams]="{editing: 1}">Update</a>
+            <button *ngIf="isAuthenticated" (click)="onDelete(product._id)">Delete</button>
+            <button *ngIf="isAuthenticated" (click)="addToCart(product._id)">Add to Cart</button>
+        </app-button>
+    </div>
+</div>

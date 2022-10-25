@@ -1,0 +1,22 @@
+<div *ngIf="!isLoading;else loading">
+    <app-form *ngIf="isProduct || !editing;else no_product">
+        <form [formGroup]="productForm" enctype="multipart/form-data" (ngSubmit)="addProduct()">
+            <app-error *ngIf="error">{{error}}</app-error>
+            <label for="title">Title</label>
+            <input type="text" id="title" formControlName="title" />
+            <label for="price">Price</label>
+            <input type="number" id="price" step="0.01" formControlName="price" />
+            <label for="image">Image</label>
+            <input type="file" (change)="onFileSelect($event)" id="image" accept=".png, .jpg, .jpeg" />
+            <label for="description">Description</label>
+            <textarea rows="5" id="description" formControlName="description"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </app-form>
+    <ng-template #no_product>
+        <app-empty><h3>No such a Product!</h3></app-empty>
+    </ng-template>
+</div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

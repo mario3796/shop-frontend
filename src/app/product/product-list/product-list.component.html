@@ -1,0 +1,10 @@
+<app-loading-spinner *ngIf="isLoading;else other_content"></app-loading-spinner>
+<ng-template #other_content>
+    <app-product-item [isAuthenticated]="isAuthenticated"
+    *ngFor="let product of products"
+    (deleteProduct)="deleteProduct($event)"
+    [product]="product"></app-product-item>
+    <app-empty *ngIf="!products.length">
+        <h3>No Products Found!</h3>
+    </app-empty>
+</ng-template>

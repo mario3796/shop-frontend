@@ -1,0 +1,42 @@
+<div *ngIf="!isLoading;else loading">
+    <div class="order" *ngIf="order;else no_order">
+        <h4>Order Id: {{order._id}}</h4>
+        <h5>Orderer By: {{order.userId.username}}</h5>
+        <h5>Total Price: {{order.price}}</h5>
+        <h5>Order Date: {{order.createdAt}}</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Title</th>
+                    <th>Product Price</th>
+                    <th>Product Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of order.products">
+                    <td>{{product._id}}</td>
+                    <td>{{product.title}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.quantity | number: '1.2-2'}}</td>
+                    <td>{{product.price * product.quantity | number: '1.2-2'}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Total Price</td>
+                    <td>{{order.price | number: '1.2-2'}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <ng-template #no_order>
+        <app-empty>
+            <h3>No such an Order!</h3>
+        </app-empty>
+    </ng-template>
+</div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>

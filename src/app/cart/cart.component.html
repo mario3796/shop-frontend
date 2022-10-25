@@ -1,0 +1,24 @@
+<div *ngIf="!isLoading;else loading">
+    <div *ngIf="cart.length > 0;else no_item">
+        <app-cart-item
+        *ngFor="let item of cart"
+        [item]="item" (increment)="increment($event)"
+        (decrement)="decrement($event)"
+        ></app-cart-item>
+        <app-empty>
+            <h3>Total Price: {{totalPrice | number: '1.2-2'}}</h3>
+            <app-button>
+                <button (click)="addOrder()">Checkout</button>
+                <button (click)="clearCart()">Clear</button>
+            </app-button>
+        </app-empty>
+    </div>
+    <ng-template #no_item>
+        <app-empty>
+            <h3>No Product Added!</h3>
+        </app-empty>
+    </ng-template>
+</div>
+<ng-template #loading>
+    <app-loading-spinner></app-loading-spinner>
+</ng-template>
