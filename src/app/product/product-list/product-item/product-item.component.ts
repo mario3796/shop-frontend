@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { CartService } from '../../../cart/cart.service';
@@ -7,7 +7,8 @@ import { Product } from '../../product';
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
-  styleUrls: ['./product-item.component.css']
+  styleUrls: ['./product-item.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: Product;

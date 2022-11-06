@@ -6,7 +6,7 @@
         <app-button>
             <a routerLink="/products/{{product._id}}">Details</a>
             <a *ngIf="isAuthenticated"
-            [routerLink]="'/edit-product/' + product._id" [queryParams]="{editing: 1}">Update</a>
+            [routerLink]="'/products/edit-product/' + product._id" [queryParams]="{editing: 1}">Update</a>
             <button *ngIf="isAuthenticated" (click)="onDelete(product._id)">Delete</button>
             <button *ngIf="isAuthenticated" (click)="addToCart(product._id)">Add to Cart</button>
         </app-button>

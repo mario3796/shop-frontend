@@ -8,8 +8,8 @@
         <app-empty>
             <h3>Total Price: {{totalPrice | number: '1.2-2'}}</h3>
             <app-button>
-                <button (click)="addOrder()">Checkout</button>
-                <button (click)="clearCart()">Clear</button>
+                <button (click)="onAddOrder()">Checkout</button>
+                <button (click)="onClear()">Clear</button>
             </app-button>
         </app-empty>
     </div>

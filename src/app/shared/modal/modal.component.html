@@ -1,0 +1,10 @@
+<app-backdrop [show]="show" (clicked)="hide()"></app-backdrop>
+<div *ngIf="show"
+class="modal"
+[ngStyle]="{'display': show ? 'block' : 'none'}">
+  <div class="header">
+    <h3>{{modalHeader}}</h3>
+  </div>
+  <div class="body" #modalBody>
+  </div>
+</div>

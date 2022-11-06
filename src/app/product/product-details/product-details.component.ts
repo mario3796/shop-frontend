@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,8 @@ import { Product } from '../product';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css'],
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ProductDetailsComponent implements OnInit {
   product?: Product

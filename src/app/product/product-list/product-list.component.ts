@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 
 import { Product } from '../product';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -15,7 +16,10 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isAuthenticated = false
   private authListenerSub?: Subscription;
   
-  constructor(private productService: ProductService, private authService: AuthService) { }
+  constructor(
+    private productService: ProductService,
+    private authService: AuthService,
+    private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -46,7 +50,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.productService.deleteProduct(id)
     .subscribe(data => {
       console.log(data)
-      this.isLoading = true
+      this.isLoading = true;
+      this.modalService.setModal('PRODUCT_DELETED')
       this.getProducts()
     })
   }

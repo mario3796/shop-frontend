@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CartService } from './cart.service';
+import { ModalService } from '../shared/modal/modal.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ export class CartComponent implements OnInit {
   cart = []
   totalPrice = 0
   isLoading = false;
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -59,6 +60,14 @@ export class CartComponent implements OnInit {
       console.log(data)
       this.getCart();
     })
+  }
+
+  onClear() {
+    this.modalService.setModal('CLEAR', { clearCart: this.clearCart.bind(this) })
+  }
+
+  onAddOrder() {
+    this.modalService.setModal('CHECKOUT', { addOrder: this.addOrder.bind(this) })
   }
 
 }

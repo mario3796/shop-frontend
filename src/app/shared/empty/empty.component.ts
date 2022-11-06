@@ -4,7 +4,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   selector: 'app-empty',
   templateUrl: './empty.component.html',
   styleUrls: ['./empty.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class EmptyComponent implements OnInit {
 

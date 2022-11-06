@@ -4,17 +4,15 @@
     </div>
     <div class="left">
         <a routerLink="/products">Products</a>
-        <div *ngIf="isAuthenticated">
-            <a routerLink="/new-product" [queryParams]="{editing: 0}">New Product</a>
-            <a [routerLink]="'/cart'">Cart</a>
-            <a routerLink="/orders">Orders</a>
-        </div>
+        <a *ngIf="isAuthenticated" routerLink="/products/new-product" [queryParams]="{editing: 0}">New Product</a>
+        <a *ngIf="isAuthenticated" [routerLink]="'/cart'">Cart</a>
+        <a *ngIf="isAuthenticated" routerLink="/orders">Orders</a>
     </div>
     <div class="right">
         <button *ngIf="isAuthenticated" (click)="onLogout()">Logout</button>
         <div *ngIf="!isAuthenticated">
-            <a routerLink="/signup">Sign up</a>
-            <a routerLink="/login">Login</a>
+            <a routerLink="/auth/signup">Sign up</a>
+            <a routerLink="/auth/login">Login</a>
         </div>
     </div>
 </header>

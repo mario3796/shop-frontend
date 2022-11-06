@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { ModalService } from 'src/app/shared/modal/modal.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -25,6 +26,7 @@ export class EditProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private route: ActivatedRoute,
+    private modalService: ModalService,
     private router: Router) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -69,7 +71,10 @@ export class EditProductComponent implements OnInit {
   addProduct() {
     if(this.editing) {
       this.productService.editProduct({...this.productForm.value} as Product)
-      .subscribe(_product => this.router.navigateByUrl('/'), err => {
+      .subscribe(_product => {
+        this.modalService.setModal('PRODUCT_UPDATED')
+        this.router.navigateByUrl('/')
+      }, err => {
         console.log(err);
         err.error.message ? this.error = err.error.message
         : this.error = 'Something went Wrong!'
@@ -77,7 +82,10 @@ export class EditProductComponent implements OnInit {
       return;
     } 
     this.productService.addProduct({...this.productForm.value} as Product)
-    .subscribe(_product => this.router.navigateByUrl('/'), err => {
+    .subscribe(_product => {
+      this.modalService.setModal('PRODUCT_ADDED')
+      this.router.navigateByUrl('/')
+    }, err => {
       console.log(err);
       err.error.message ? this.error = err.error.message
       : this.error = 'Something went Wrong!'

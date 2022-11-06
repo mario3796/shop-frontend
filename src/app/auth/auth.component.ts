@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ErrorComponent } from '../shared/error/error.component';
+import { ModalService } from '../shared/modal/modal.service';
 import { AuthService } from './auth.service';
 import { User } from '../user';
 
@@ -18,11 +18,14 @@ export class AuthComponent implements OnInit {
     username: new FormControl(null),
     password: new FormControl(null, [Validators.required, Validators.min(6)])
   })
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private modalService: ModalService) {
   }
 
   ngOnInit(): void {
-    if (this.router.url === '/login') {
+    if (this.router.url === '/auth/login') {
       this.isLogin = true
     } else {
       const username = new FormControl(null, [Validators.required, Validators.min(2)])
@@ -45,7 +48,8 @@ export class AuthComponent implements OnInit {
     }
     this.authService.signup(user)
     .subscribe(() => {
-      this.router.navigateByUrl('/login')
+      this.modalService.setModal('SIGN_IN')
+      this.router.navigateByUrl('/auth/login')
     }, err => {
       console.log(err)
       this.error = err.error.message

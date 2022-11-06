@@ -1,7 +1,7 @@
 <div class="orderItem">
-    <h4>Order ID: {{item._id}}</h4>
-    <h5>Price: {{item.price | number: '1.2-2'}}</h5>
-    <h5>Username: {{item.userId.username}}</h5>
+    <h3>Order ID: {{item._id}}</h3>
+    <h4>Price: {{item.price | number: '1.2-2'}}</h4>
+    <h4>Username: {{item.userId.username}}</h4>
     <app-button>
         <a [routerLink]="'/orders/'+item._id">View</a>
     </app-button>
