@@ -1,8 +1,8 @@
 <div *ngIf="!isLoading;else loading">
     <div class="order" *ngIf="order;else no_order">
         <h3>Order Id: {{order._id}}</h3>
-        <h4>Orderer By: {{order.userId.username}}</h4>
-        <h4>Total Price: {{order.price}}</h4>
+        <h4>Ordered By: {{order.userId.username}}</h4>
+        <h4>Total Price: {{order.price}}$</h4>
         <h4>Order Date: {{order.createdAt}}</h4>
         <table>
             <thead>
@@ -20,13 +20,13 @@
                     <td>{{product.title}}</td>
                     <td>{{product.price}}</td>
                     <td>{{product.quantity}}</td>
-                    <td>{{product.price * product.quantity | number: '1.2-2'}}</td>
+                    <td>{{product.price * product.quantity | number: '1.2-2'}}$</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="4">Total Price</td>
-                    <td>{{order.price | number: '1.2-2'}}</td>
+                    <td>{{order.price | number: '1.2-2'}}$</td>
                 </tr>
             </tfoot>
         </table>

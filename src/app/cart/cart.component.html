@@ -6,7 +6,7 @@
         (decrement)="decrement($event)"
         ></app-cart-item>
         <app-empty>
-            <h3>Total Price: {{totalPrice | number: '1.2-2'}}</h3>
+            <h3>Total Price: {{totalPrice | number: '1.2-2'}}$</h3>
             <app-button>
                 <button (click)="onAddOrder()">Checkout</button>
                 <button (click)="onClear()">Clear</button>
