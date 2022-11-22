@@ -6,7 +6,9 @@
         ></app-order-item>
     </div>
     <ng-template #no_order>
-        <h3>No Orders yet!</h3>
+        <app-empty>
+            <h3>No Orders yet!</h3>
+        </app-empty>
     </ng-template>
 </div>
 <ng-template #loading>
