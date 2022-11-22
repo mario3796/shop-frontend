@@ -10,6 +10,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { ModalComponent } from './modal/modal.component';
 import { BackdropComponent } from './modal/backdrop/backdrop.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 const components = [
     ButtonComponent,
@@ -19,7 +20,8 @@ const components = [
     LoadingSpinnerComponent,
     MainNavigationComponent,
     ModalComponent,
-    BackdropComponent
+    BackdropComponent,
+    PaginationComponent
 ]
 
 @NgModule({

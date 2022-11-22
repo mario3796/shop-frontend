@@ -1,0 +1,14 @@
+<section class="pagination" *ngIf="currentPage <= lastPage">
+    <div style="margin: auto;">
+        <a *ngIf="currentPage !== 1 && previousPage !== 1"
+        routerLink="/products" [queryParams]="{page: 1}"><<</a>
+        <a *ngIf="hasPreviousPage" routerLink="/products"
+        [queryParams]="{page: previousPage}">{{previousPage}}</a>
+        <a routerLink="/products" class="active"
+        [queryParams]="{page: currentPage}">{{currentPage}}</a>
+        <a *ngIf="hasNextPage" [routerLink]="'/products'"
+        [queryParams]="{page: nextPage}">{{nextPage}}</a>
+        <a *ngIf="currentPage !== lastPage && nextPage !== lastPage"
+        routerLink="/products" [queryParams]="{page: lastPage}">>></a>
+    </div>
+</section>
