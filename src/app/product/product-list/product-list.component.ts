@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Product } from '../product';
+
 import { ProductService } from '../product.service';
 import { ModalService } from 'src/app/shared/modal/modal.service';
-
-import { Product } from '../product';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -14,12 +15,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = []
   isLoading = false
   isAuthenticated = false
+  totalItems = 0
+  page = 1
+
   private authListenerSub?: Subscription;
   
   constructor(
     private productService: ProductService,
     private authService: AuthService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -36,13 +41,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   getProducts() {
-    this.productService.getProducts()
-    .subscribe(products => {
-      this.products = [...products]
-      this.isLoading = false
-    }, err => {
-      console.log(err);
-      this.isLoading = false
+    this.route.queryParams
+    .subscribe(params => {
+      this.page = +params['page'] || this.page
+      this.productService.getProducts(params['page'])
+      .subscribe(data => {
+        this.products = [...data.products]
+        this.totalItems = data.totalItems
+        this.isLoading = false
+      }, err => {
+        console.log(err);
+        this.isLoading = false
+      })
     })
   }
 
