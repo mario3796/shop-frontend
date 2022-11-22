@@ -12,7 +12,11 @@ export class CartService {
 
     getCart() {
        return this.http.get<{ cart: [], totalPrice: number }>
-       (`${this.apiUrl}cart/${localStorage.getItem('userId')}`)
+       (`${this.apiUrl}cart/${localStorage.getItem('userId')}`, {
+        headers: {
+            'Authentication': localStorage.getItem('token')!
+        }
+    })
     }
 
     addProduct(productId: string) {
@@ -20,7 +24,8 @@ export class CartService {
             productId: productId,
             userId: localStorage.getItem('userId')
         }, { headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authentication': localStorage.getItem('token')!
         } })
     }
 
@@ -30,13 +35,18 @@ export class CartService {
             userId: localStorage.getItem('userId')
         }, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authentication': localStorage.getItem('token')!
             }
         })
     }
 
     clearCart() {
-        return this.http.delete(`${this.apiUrl}cart/${localStorage.getItem('userId')}`)
+        return this.http.delete(`${this.apiUrl}cart/${localStorage.getItem('userId')}`, {
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
+        })
     }
     
     addOrder(totalPrice: number, products: any[]) {
@@ -45,7 +55,10 @@ export class CartService {
             price: totalPrice,
             products: products
         }), {
-            headers: { 'Content-Type': 'application/json' }
+            headers: {
+                'Content-Type': 'application/json',
+                'Authentication': localStorage.getItem('token')!
+            }
         })
     }
 

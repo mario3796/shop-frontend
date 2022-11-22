@@ -16,12 +16,11 @@ export class ProductService {
     constructor(private http: HttpClient) {
     }
     
-    getProducts(): Observable<Product[]> {
-        return this.http.get<{products: Product[]}>(`${this.apiUrl}products`)
+    getProducts(page = '1'): Observable<{products: Product[], totalItems: number}> {
+        return this.http.get<{products: Product[], totalItems: number}>(`${this.apiUrl}products?page=${page}`)
         .pipe(map(data => {
             console.log(data)
-            const products = [...data.products]
-            return products
+            return data
         }), catchError(err => {
             throw err
         }))
@@ -45,7 +44,11 @@ export class ProductService {
         formData.append('image', product.image);
         formData.append('description', product.description)
         return this.http.post<{product: Product}>(`${this.apiUrl}products`,
-        formData)
+        formData, {
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
+        })
         .pipe(map(data => {
             console.log(data)
             const product = { ...data.product };
@@ -62,7 +65,11 @@ export class ProductService {
         formData.append('image', product.image);
         formData.append('description', product.description);
         return this.http.put<{product: Product}>(`${this.apiUrl}products/${product._id}`,
-        formData)
+        formData, {
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
+        })
         .pipe(map(data => {
             console.log(data)
             const product = { ...data.product };
@@ -73,7 +80,11 @@ export class ProductService {
     }
 
     deleteProduct = (productId: string) => (
-        this.http.delete(`${this.apiUrl}products/${productId}`)
+        this.http.delete(`${this.apiUrl}products/${productId}`, {
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
+        })
         .pipe(catchError(err => {
             throw err
         }))

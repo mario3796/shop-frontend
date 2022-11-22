@@ -14,12 +14,19 @@ export class OrderService {
         let params = new HttpParams()
         .set('userId', '' + localStorage.getItem('userId'))
         return this.http.get<{ orders: [] }>(`${this.apiUrl}orders`, {
-            params: params
+            params: params,
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
         })
     }
 
     getOrder(orderId: string) {
-        return this.http.get<{ order: any }>(`${this.apiUrl}orders/${orderId}`)
+        return this.http.get<{ order: any }>(`${this.apiUrl}orders/${orderId}`, {
+            headers: {
+                'Authentication': localStorage.getItem('token')!
+            }
+        })
     }
 
 }
