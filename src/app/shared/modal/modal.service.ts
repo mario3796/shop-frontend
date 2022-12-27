@@ -1,15 +1,25 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModalService {
-    show = false;
     content: any = null
     private renderer: Renderer2
+    private modalShowListener = new Subject<boolean>();
+    private modalContentListener = new Subject<any>();
 
     constructor(private rendererFactory: RendererFactory2) {
         this.renderer = rendererFactory.createRenderer(null, null)
+    }
+
+    getModalShowListener() {
+        return this.modalShowListener.asObservable()
+    }
+
+    getModalContentListener() {
+        return this.modalContentListener.asObservable();
     }
     
     setModal(action: string, payload?: any) {
@@ -89,14 +99,12 @@ export class ModalService {
                 this.renderer.appendChild(this.content, closeButton);
                 break;
             }
-        this.show = true
+        
+        this.modalContentListener.next(this.content)
+        this.modalShowListener.next(true)
     }
 
     hideModal() {
-        this.show = false
-    }
-
-    getModalStatus() {
-        return { show: this.show, content: this.content }
+        this.modalShowListener.next(false)
     }
 }
